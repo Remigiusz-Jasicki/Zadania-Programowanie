@@ -21,9 +21,7 @@ file::file() {
         {
             cerr << "Blad - nie da sie otworzyc!\n";
             exit(1);
-        }
-}
-
+        }}
 
 file::~file() {
     inFile.close();
@@ -43,9 +41,7 @@ bool picture::checkPicture(string wiersz)
 	for(int i=k;i<20;i++){
  		if (wiersz[i]=='1') 
        		czarne++; 
-	}  
-
-}
+}  }
 
 void picture::loop()
 {
@@ -60,10 +56,7 @@ void picture::loop()
 				{
         		cout << t[j][i] << " ";
    				}
-   				cout << c <<endl;
-			}
-        }
-}
+   				cout << c <<endl;}}}
 
 int main(int argc, char** argv) {
     picture pit;
