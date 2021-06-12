@@ -1,0 +1,71 @@
+MainPage.xaml.cpp
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
+
+using namespace std;
+
+class file {  
+    protected:
+                ifstream inFile;      
+               
+    public:    
+        file();
+        ~file();
+        virtual void loop()=0;
+};
+
+file::file() {
+    inFile.open("dane_ulamki.txt");
+    if (!inFile.good())
+        {
+                cerr << "Blad - pliku nie da sie otworzyc!\n";
+                exit(1);
+        }
+}
+
+
+file::~file() {
+    inFile.close();
+}
+
+
+class ulamki
+   : public file
+{
+                bool mniejszy(string);
+                bool rowny(string);
+               
+    public:
+        virtual void loop();        
+};
+
+
+
+bool mniejszy(long l1, long m1, long l2, long m2){
+ return (l1*m2<l2*m1);
+}
+
+bool rowny(long l1, long m1, long l2, long m2){
+ return (l1*m2==l2*m1);
+}
+
+void ulamki::loop()
+{
+        int minL, minM;
+  minL=licz[0];
+  minM=mian[0];
+  for(int i=1; i<1000; i++){
+  if (mniejszy(licz[i],mian[i],minL,minM)){
+  minL=licz[i]; minM=mian[i];
+  }
+  else if (rowny(licz[i],mian[i],minL,minM)){
+  if (mian[i]<minM){
+  minL=licz[i]; minM=mian[i];
+  } } }}
+
+int main(int argc, char** argv) {
+    ulamki min;
+    output->min.loop();
+    return 0;
