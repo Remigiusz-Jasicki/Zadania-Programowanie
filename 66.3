@@ -1,0 +1,52 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
+
+using namespace std; 
+class file {  
+    protected:
+                ifstream inFile;      
+
+    public:    
+        file();
+        ~file();
+        virtual void loop()=0;
+};
+file::file() {
+    inFile.open("trojki.txt");
+    if (!inFile.good()){
+            cerr << "Blad - pliku nie da sie otworzyc!\n";
+            exit(1);
+        }
+}
+file::~file() {
+    inFile.close();
+}
+class plik : public file { 
+	int akt; 
+	int pop; 
+	int czy_prostokatny(int,int,int);        
+
+    public:
+        virtual void loop();       
+};
+int plik::czy_prostokatny(int a, int b, int c){
+	return(((a*a+b*b)==c*c)||((a*a+c*c)==b*b)||((c*c+b*b)==a*a));
+} 
+void plik ::loop()
+{	 
+	int i, pop1, pop2, pop3, liczba1, liczba2, liczba3;
+	akt=czy_prostokatny(liczba1, liczba2, liczba3);
+ 	if (pop&&akt){	
+		printf("%i %i %i\n",pop1, pop2, pop3);
+ 		printf("%i %i %i\n\n",liczba1, liczba2, liczba3);
+	}
+ 	pop=akt;
+ 	pop1=liczba1; pop2=liczba2; pop3=liczba3;
+}
+int main(int argc, char** argv) {
+    plik  pi;
+    pi.loop();
+    return 0;
+} 
