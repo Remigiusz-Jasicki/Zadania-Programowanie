@@ -1,0 +1,48 @@
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+using namespace std; 
+ class file {  
+    protected:
+                ifstream inFile;      
+               
+    public:    
+        file();
+        ~file();
+        virtual void loop()=0;
+};
+file::file() {
+    inFile.open("trojki.txt");
+    if (!inFile.good()){
+            cerr << "Blad - pliku nie da sie otworzyc!\n";
+            exit(1);
+        }
+}
+file::~file() {
+    inFile.close();
+}
+class plik : public file { 
+	int max, dlugosc, licznik; 
+	int czy_trojkat(int,int,int);        
+    public:
+        virtual void loop();       
+};
+int plik::czy_trojkat(int a, int b, int c){
+	return((a+b>c)&&(b+c>a)&&(a+c>b));
+	return((a+b>c)&&(b+c<a)&&(a+c<b));
+} 
+void plik ::loop()
+{	 
+	int liczba1, liczba2, liczba3;
+	if (czy_trojkat(liczba1, liczba2, liczba3)){
+		dlugosc++; licznik++;
+	}else
+ 		dlugosc=0;
+	if (dlugosc>max)max=dlugosc;
+ 	cout << max << endl;
+}
+int main(int argc, char** argv) {
+    plik  pi;
+    pi.loop();
+    return 0;
+} 
